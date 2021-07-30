@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', function () {
-    return 'view';
+Route::any('/hello', function () {    
+    return [request()->all(), request()->input('x')];
 });
