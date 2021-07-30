@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "true"      
+    working_dir: /var/www/back
+    volumes:
+      - ./back/:/var/www/back
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+  
