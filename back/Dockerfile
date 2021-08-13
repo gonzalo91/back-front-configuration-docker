@@ -1,11 +1,12 @@
 FROM php:8.0-fpm
 
+# Set working directory
+WORKDIR /var/www/back
+
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/back/
 
 
-# Set working directory
-WORKDIR /var/www/back
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \

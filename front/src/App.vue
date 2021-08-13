@@ -1,5 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
+  <p>Esooo Estasmos en {{ env }}</p>
   <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
@@ -8,8 +9,16 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data: () =>{
+    return {
+      env: process.env.NODE_ENV
+    }
+  },
   components: {
     HelloWorld
+  },
+  mounted(){
+      console.log(process.env)
   }
 }
 </script>

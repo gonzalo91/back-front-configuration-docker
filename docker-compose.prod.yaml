@@ -1,0 +1,14 @@
+version: '3'
+services:  
+  app:    
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"  
+  webserver:    
+    depends_on: 
+      - app            
+    volumes:
+      - ./back/:/var/www/back
+      - ./nginx/prod/conf.d/:/etc/nginx/conf.d/        
+  
+  

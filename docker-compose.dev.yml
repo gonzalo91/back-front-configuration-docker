@@ -1,22 +1,33 @@
 version: '3'
 services:
+  
+  app:    
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"          
 
-  #PHP Service
-  app:
+  front-end:
     build:
-      context: ./back
+      context: ./front
       dockerfile: Dockerfile
-    image: digitalocean.com/php
-    container_name: app
+    image: node:15
+    container_name: front-end
     restart: unless-stopped
     tty: true
     environment:
-      APP_ENV: production
-      APP_DEBUG: "true"      
-    working_dir: /var/www/back
+      NODE_ENV: development 
+    working_dir: /var/www/front
+    volumes:
+      - /var/www/front/node_modules
+      - ./front/:/var/www/front      
+    networks:
+      - app-network      
+  
+  webserver:    
+    depends_on: 
+      - app      
+      
     volumes:
       - ./back/:/var/www/back
-      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
-    networks:
-      - app-network
-  
+      - ./front/:/var/www/front
+      - ./nginx/dev/conf.d/:/etc/nginx/conf.d/
