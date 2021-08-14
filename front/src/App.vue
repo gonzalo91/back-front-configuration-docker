@@ -1,6 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <p>Esooo Estasmos en {{ env }}</p>
+  <p>Custom ENV <strong>{{custom_env}}</strong></p>
   <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
@@ -11,7 +12,8 @@ export default {
   name: 'App',
   data: () =>{
     return {
-      env: process.env.NODE_ENV
+      custom_env: process.env.VUE_APP_TITLE,
+      env: process.env.NODE_ENV,
     }
   },
   components: {
